@@ -37,29 +37,29 @@ def main():
         if options.docker_container_name:
             build_influxdb_container(options.docker_container_name)
 
-            print ""
-            print " + Docker container generated:"
-            print "-------------------------------"
-            print run_check_output(
+            print("")
+            print(" + Docker container generated:")
+            print("-------------------------------")
+            print(run_check_output(
                 "docker images {}".format(options.docker_container_name),
                 allow_failure=True,
-                )
+                ))
 
         if options.build_packages_opt:
             logging.debug("chdir to {}".format(HOME))
             os.chdir(HOME)
 
             output_dir = HOME + "/build_output/"
-            print ""
-            print " + InfluxDB packages generated are available here: "
-            print "----------------------------------------------------"
+            print("")
+            print(" + InfluxDB packages generated are available here: ")
+            print("----------------------------------------------------")
             for package in ["rpm", "deb", "tar.gz"]:
-                print ""
-                print package + " package:"
+                print("")
+                print(package + " package:")
                 for result in fnmatch.filter(
                                             os.listdir(output_dir),
                                             "*." + package):
-                    print output_dir + result
+                    print(output_dir + result)
     else:
         sys.exit(1)
 
@@ -141,7 +141,7 @@ def prepare_build():
 
     if not os.path.exists("build_output"):
         logging.debug('Creating build_output dir')
-        os.makedirs("build_output", mode=0755)
+        os.makedirs("build_output", mode=0o755)
 
     try:
         logging.debug("Testing if docker is available")
@@ -218,11 +218,11 @@ def build_influxdb_container(container_name):
     logging.debug("chdir to {}/build_docker".format(HOME))
     os.chdir(HOME + "/build_docker")
 
-    print ""
+    print("")
     logging.info(
         "Building influxdb docker container : {}".format(container_name)
         )
-    print""
+    print("")
     p = subprocess.Popen("docker build -t {} .".format(container_name).split())
     p.wait()
 
