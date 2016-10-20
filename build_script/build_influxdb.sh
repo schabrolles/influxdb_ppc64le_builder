@@ -45,7 +45,7 @@ gem install fpm
 export GOPATH=/go
 export GITHUB_REPO=schabrolles
 mkdir -p $GOPATH/src/github.com/influxdata/influxdb
-git clone https://github.com/$GITHUB_REPO/influxdb.git $GOPATH/src/github.com/influxdata/influxdb -b $branch
+git clone https://gitlab.com/$GITHUB_REPO/influxdb.git $GOPATH/src/github.com/influxdata/influxdb -b $branch
 cd $GOPATH/src/github.com/influxdata/influxdb
 
 if [ $build_packages -eq 1 ]; then
